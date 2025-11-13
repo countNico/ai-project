@@ -1,3 +1,3 @@
 # ai-project
 
-You can play Othello online: [Demo](https://countnico.github.io/ai-project/)
+You can test project here: [Demo](https://countnico.github.io/ai-project/)
