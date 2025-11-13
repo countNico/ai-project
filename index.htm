@@ -760,6 +760,101 @@
 	  color: var(--neon-red);
 	  font-weight: 600;
 	}
+	
+	#page-game-balloons .card {
+	  text-align: center;
+	  padding: 24px;
+	  background: linear-gradient(145deg, #0b132b, #1c2541);
+	  color: var(--light-text);
+	}
+
+	.balloon-area {
+	  position: relative;
+	  width: 100%;
+	  height: 400px;
+	  margin: 20px auto;
+	  border-radius: 12px;
+	  overflow: hidden;
+	  background: rgba(255, 255, 255, 0.05);
+	  box-shadow: 0 0 16px rgba(33, 150, 243, 0.2);
+	}
+
+	.balloon {
+	  position: absolute;
+	  width: 50px;
+	  height: 65px;
+	  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+	  cursor: pointer;
+	  box-shadow: 0 0 12px rgba(255,255,255,0.4);
+	  transition: transform 0.1s ease;
+	}
+
+	.balloon:hover {
+	  transform: scale(1.1);
+	  box-shadow: 0 0 16px rgba(255,255,255,0.6);
+	}
+
+	.pop {
+	  animation: popAnim 0.3s ease forwards;
+	}
+
+	@keyframes popAnim {
+	  0% { transform: scale(1); opacity: 1; }
+	  100% { transform: scale(1.8); opacity: 0; }
+	}
+
+	#page-videos .card {
+	  text-align: center;
+	  padding: 24px;
+	  background: linear-gradient(145deg, #0b132b, #1c2541);
+	  color: var(--light-text);
+	}
+
+	.video-container {
+	  display: flex;
+	  flex-wrap: wrap;
+	  justify-content: center;
+	  gap: 30px;
+	  margin-top: 24px;
+	}
+
+	.video-box {
+	  background: rgba(255, 255, 255, 0.05);
+	  border-radius: 16px;
+	  box-shadow: 0 0 16px rgba(0, 255, 255, 0.15);
+	  overflow: hidden;
+	  width: 320px;
+	  position: relative;
+	  transition: transform 0.3s ease;
+	}
+
+	.video-box:hover {
+	  transform: scale(1.03);
+	  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+	}
+
+	.video-box video {
+	  width: 100%;
+	  height: 180px;
+	  object-fit: cover;
+	  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.video-play-btn {
+	  width: 100%;
+	  padding: 12px;
+	  font-size: 1rem;
+	  border: none;
+	  cursor: pointer;
+	  color: #fff;
+	  background: linear-gradient(135deg, #2196f3, #1565c0);
+	  transition: all 0.2s ease;
+	}
+
+	.video-play-btn:hover {
+	  background: linear-gradient(135deg, #42a5f5, #0d47a1);
+	  box-shadow: 0 0 10px var(--neon-blue);
+	}
 
 
     /* ========== Responsive ========== */
@@ -886,6 +981,12 @@
                 </svg>
                 <span class="nav-link">نفس بکش!</span>
               </li>
+              <li class="nav-item" data-page="game-balloons">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+                <span class="nav-link">بازی بادکنک</span>
+              </li>
             </ul>
           </div>
 
@@ -903,6 +1004,12 @@
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                 </svg>
                 <span class="nav-link">۵ حرکت برای تقویت گفتار</span>
+              </li>
+              <li class="nav-item" data-page="videos">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                </svg>
+                <span class="nav-link">ویدئوهای آموزشی</span>
               </li>
             </ul>
           </div>
@@ -1294,6 +1401,25 @@
 			</div>
 		  </div>
 		</div>
+		
+		<!-- Game: Color Balloons -->
+		<div class="page" id="page-game-balloons">
+		  <div class="card neon-border">
+			<h2 class="page-title">🎈 بازی «بادکنک رنگی!»</h2>
+			<p class="subtitle">🎯 هدف: تمرین دقت و تشخیص رنگ‌ها</p>
+
+			<div class="game-container neon-shadow">
+			  <div id="balloonQuestion" class="question-box">
+				<p id="balloonPrompt" class="question-text">برای شروع روی دکمه زیر بزن!</p>
+			  </div>
+
+			  <div id="balloonArea" class="balloon-area"></div>
+
+			  <button id="startBalloonGame" class="start-btn">🎮 شروع بازی</button>
+			  <p id="balloonResult" class="hint-text"></p>
+			</div>
+		  </div>
+		</div>
 
 
       <!-- Resource: ADHD -->
@@ -1351,8 +1477,35 @@
           </div>
         </div>
       </div>
+	  
+	  <!-- Page: Educational Videos -->
+		<div class="page" id="page-videos">
+		  <div class="card neon-border">
+			<h2 class="page-title">🎥 ویدئوهای آموزشی مهارت «نه گفتن»</h2>
+			<p class="subtitle">🌈 یاد بگیر در موقعیت‌های مختلف چطور با احترام «نه» بگی</p>
+
+			<div class="video-container neon-shadow">
+			  <div class="video-box">
+				<video id="video1" src="videos/1.mp4" poster="https://img.icons8.com/?size=512&id=11858&format=png" preload="metadata"></video>
+				<button class="video-play-btn" data-target="video1">▶️ پخش ویدئو اول</button>
+			  </div>
+
+			  <div class="video-box">
+				<video id="video2" src="videos/2.mp4" poster="https://img.icons8.com/?size=512&id=11858&format=png" preload="metadata"></video>
+				<button class="video-play-btn" data-target="video2">▶️ پخش ویدئو دوم</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  
     </main>
   </div>
+  
+  <!-- ======= Audio Section ======= -->
+	<audio id="sound-correct" src="https://tiengdong.com/wp-content/uploads/Right-answer-sound-effect-www_tiengdong_com.mp3" preload="auto"></audio>
+	<audio id="sound-wrong" src="https://tiengdong.com/wp-content/uploads/Buzzer-wrong-answer-gaming-sound-effect-www_tiengdong_com.mp3" preload="auto"></audio>
+	<audio id="sound-end" src="https://tiengdong.com/wp-content/uploads/the-price-is-right-ding-sound-effect-www_tiengdong_com.mp3" preload="auto"></audio>
+
 
   <script>
     // ========== Data ==========
@@ -1718,6 +1871,7 @@
 		document.getElementById("btnYes").style.display = "none";
 		document.getElementById("btnNo").style.display = "none";
 		document.getElementById("resultBox").innerText = "";
+		document.getElementById("sound-end").play();
 		return;
 	  }
 	  document.getElementById("questionText").innerText = q.text;
@@ -1731,9 +1885,11 @@
 		score++;
 		resultBox.style.color = "var(--neon-green)";
 		resultBox.innerText = q.feedback;
+		document.getElementById("sound-correct").play();
 	  } else {
 		resultBox.style.color = "var(--neon-red)";
 		resultBox.innerText = "😕 نه، فکر کن ببین بهتر نبود جواب دیگه‌ای بدی؟";
+		document.getElementById("sound-wrong").play();
 	  }
 	  setTimeout(showQuestion, 2000);
 	}
@@ -1779,6 +1935,7 @@
 		result.innerHTML = "";
 		document.getElementById("startMissingGame").style.display = "inline-block";
 		return;
+		document.getElementById("sound-end").play();
 	  }
 
 	  questionText.innerText = q.word;
@@ -1801,10 +1958,12 @@
 		totalCorrect++;
 		result.style.color = "var(--neon-green)";
 		result.innerText = "👏 آفرین! جواب درسته.";
+		document.getElementById("sound-correct").play();
 	  } else {
 		btn.classList.add("wrong");
 		result.style.color = "var(--neon-red)";
 		result.innerText = `❌ نه! جواب درست: ${correct}`;
+		document.getElementById("sound-wrong").play();
 	  }
 
 	  setTimeout(showMissingQuestion, 1500);
@@ -1860,9 +2019,11 @@
 		if (success) {
 		  holdMessage.innerHTML = "🎉 آفرین! خیلی عالی نفس کشیدی 😌";
 		  holdMessage.className = "hint-text breath-success";
+		  document.getElementById("sound-correct").play();
 		} else {
 		  holdMessage.innerHTML = "😅 دوباره تلاش کن! آروم‌تر و طولانی‌تر نفس بکش.";
 		  holdMessage.className = "hint-text breath-fail";
+		  document.getElementById("sound-wrong").play();
 		}
 
 		setTimeout(() => {
@@ -1880,6 +2041,127 @@
 	  holdArea.addEventListener("touchstart", e => { e.preventDefault(); startHold(); });
 	  holdArea.addEventListener("touchend", () => endHold());
 	});
+	
+	// === Game: Color Balloons ===
+	document.addEventListener("DOMContentLoaded", () => {
+	  const balloonArea = document.getElementById("balloonArea");
+	  const balloonPrompt = document.getElementById("balloonPrompt");
+	  const balloonResult = document.getElementById("balloonResult");
+	  const startBtn = document.getElementById("startBalloonGame");
+
+	  if (!balloonArea) return;
+
+	  const colors = [
+		{ name: "قرمز", code: "#ef5350" },
+		{ name: "آبی", code: "#42a5f5" },
+		{ name: "سبز", code: "#66bb6a" },
+		{ name: "زرد", code: "#ffee58" },
+		{ name: "بنفش", code: "#ab47bc" },
+		{ name: "صورتی", code: "#f06292" },
+		{ name: "نارنجی", code: "#ffb74d" },
+		{ name: "فیروزه‌ای", code: "#26c6da" }
+	  ];
+
+	  let targetColor = null;
+	  let gameRunning = false;
+
+	  function random(min, max) {
+		return Math.floor(Math.random() * (max - min)) + min;
+	  }
+
+	  function createBalloons() {
+		balloonArea.innerHTML = "";
+		for (let i = 0; i < 25; i++) {
+		  const color = colors[random(0, colors.length)];
+		  const div = document.createElement("div");
+		  div.className = "balloon";
+		  div.style.background = color.code;
+		  div.style.left = `${random(5, 90)}%`;
+		  div.style.bottom = `${random(0, 80)}%`;
+		  div.dataset.color = color.name;
+		  div.addEventListener("click", () => handleBalloonClick(div));
+		  balloonArea.appendChild(div);
+		}
+	  }
+
+	  function handleBalloonClick(balloon) {
+		if (!gameRunning) return;
+		const color = balloon.dataset.color;
+		balloon.classList.add("pop");
+		setTimeout(() => balloon.remove(), 200);
+
+		if (color === targetColor.name) {
+		  // صدای درست
+		  const s = document.getElementById("sound-correct");
+		  if (s) { s.currentTime = 0; s.play().catch(()=>{}); }
+		} else {
+		  // صدای اشتباه
+		  const s = document.getElementById("sound-wrong");
+		  if (s) { s.currentTime = 0; s.play().catch(()=>{}); }
+		}
+
+		const remaining = [...document.querySelectorAll(".balloon")]
+		  .filter(b => b.dataset.color === targetColor.name);
+		if (remaining.length === 0) {
+		  endGame(true);
+		}
+	  }
+
+	  function startGame() {
+		gameRunning = true;
+		targetColor = colors[random(0, colors.length)];
+		balloonPrompt.innerHTML = `🎯 بادکنک‌های <b style="color:${targetColor.code}">${targetColor.name}</b> را بترکان!`;
+		balloonResult.innerText = "";
+		createBalloons();
+	  }
+
+	  function endGame(success) {
+		gameRunning = false;
+		balloonResult.innerText = success
+		  ? "🎉 آفرین! همه‌ی بادکنک‌های درست رو ترکوندی!"
+		  : "😅 تلاش کن دوباره بادکنک‌های درست رو پیدا کنی!";
+		const s = document.getElementById("sound-end");
+		if (s) { s.currentTime = 0; s.play().catch(()=>{}); }
+	  }
+
+	  startBtn.addEventListener("click", startGame);
+	});
+	
+	// === Page: Educational Videos ===
+	document.addEventListener("DOMContentLoaded", () => {
+	  const playButtons = document.querySelectorAll(".video-play-btn");
+
+	  playButtons.forEach(btn => {
+		btn.addEventListener("click", () => {
+		  const id = btn.dataset.target;
+		  const vid = document.getElementById(id);
+
+		  // توقف سایر ویدئوها قبل از پخش جدید
+		  document.querySelectorAll("video").forEach(v => {
+			if (v !== vid) {
+			  v.pause();
+			  v.currentTime = 0;
+			}
+		  });
+
+		  // پخش و توقف دکمه
+		  if (vid.paused) {
+			vid.play();
+			btn.innerText = "⏸️ توقف";
+		  } else {
+			vid.pause();
+			btn.innerText = "▶️ پخش";
+		  }
+
+		  // هنگام اتمام ویدئو دکمه به حالت اولیه برگردد
+		  vid.addEventListener("ended", () => {
+			btn.innerText = "▶️ پخش دوباره";
+		  });
+		});
+	  });
+	});
+
+
 
     // ========== Initialization ==========
     // Initialize tabs
